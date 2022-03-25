@@ -13,6 +13,18 @@ const userPopoverJSmith = (
 
 )
 
+const userPopoverJJonas = (
+
+    <Popover id="user-information">
+        <Popover.Header as="h4">James J. Jonas</Popover.Header>
+        <Popover.Body>
+            Email: <a href='mailto: jjonas@abccompany.com'>jjonas@abccompany.com</a> <br />
+            Phone: (816) 555-1234
+        </Popover.Body>
+    </Popover>
+
+)
+
 const userPopoverMSmith = (
 
     <Popover id="user-information">
@@ -37,7 +49,7 @@ const userPopoverLBaker = (
 
 )
 
-const PropertyManagerMaintenance = () => {
+const PropertyOwnerMaintenance = () => {
 
     const [show, setShow] = useState(false)
 
@@ -47,40 +59,51 @@ const PropertyManagerMaintenance = () => {
     return (
         <>
 
-            <h2>Property Managers:</h2>
+            <h2>Property Owners:</h2>
 
             <Table striped bordered hover className='my-5'>
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Business name</th>
+                        <th>Business legal name</th>
+                        <th>Business DBA name</th>
+                        <th>Property Manager</th>
                         <th>Address</th>
                         <th>Phone number</th>
-                        <th>Primary Contact</th>
+                        <th>Associated Users</th>
                         <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <th>1</th>
+                        <th>123 Main, LLC</th>
+                        <th>The Drake</th>
                         <th>ABC Company</th>
-                        <th>1234 Main Street, Kansas City, MO 64000</th>
+                        <th>123 Main Street, Kansas City, MO 64000</th>
                         <th>(816) 555-1234</th>
-                        <th><OverlayTrigger trigger='click' rootClose placement='left' overlay={userPopoverJSmith}><a href='#userInfo'>John L. Smith</a></OverlayTrigger></th>
+                        <th>
+                            <OverlayTrigger trigger='click' rootClose placement='left' overlay={userPopoverJSmith}><a href='#userInfo'>John L. Smith</a></OverlayTrigger> <br />
+                            <OverlayTrigger trigger='click' rootClose placement='left' overlay={userPopoverJJonas}><a href='#userInfo'>James J. Jonas</a></OverlayTrigger>
+                        </th>
                         <th><Button onClick={handleShow}>Edit</Button></th>
                     </tr>
                     <tr>
                         <th>2</th>
+                        <th>456 Main, LLC</th>
+                        <th>The Mallard</th>
                         <th>JKL Properties</th>
-                        <th>5678 Main Street, Kansas City, MO 64000</th>
+                        <th>567 Main Street, Kansas City, MO 64000</th>
                         <th>(816) 555-5678</th>
                         <th><OverlayTrigger trigger='click' rootClose placement='left' overlay={userPopoverMSmith}><a href='#userInfo'>Mary A. Smith</a></OverlayTrigger></th>
                         <th><Button disabled>Edit</Button></th>
                     </tr>
                     <tr>
                         <th>3</th>
+                        <th>789 Main, LLC</th>
+                        <th>The Goose</th>
                         <th>XYZ Property Management</th>
-                        <th>1234 Park Avenue, Kansas City, MO 64000</th>
+                        <th>789 Main Street, Kansas City, MO 64000</th>
                         <th>(816) 555-7890</th>
                         <th><OverlayTrigger trigger='click' rootClose placement='left' overlay={userPopoverLBaker}><a href='#userInfo'>Larry K. Baker</a></OverlayTrigger></th>
                         <th><Button disabled>Edit</Button></th>
@@ -91,12 +114,20 @@ const PropertyManagerMaintenance = () => {
 
             <Modal show={show} onHide={handleClose} size='xl'>
                 <Modal.Header className='bg-light' closeButton>
-                    <Modal.Title>Edit Property Manager</Modal.Title>
+                    <Modal.Title>Edit Property Owner</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Container>
                             <Row className='pt-3'>
+                                <Col>
+                                    <Form.Label>Property Owner Legal Name:</Form.Label>
+                                    <Form.Control value='123 Main, LLC' />
+                                </Col>
+                                <Col>
+                                    <Form.Label>Property Owner DBA Name:</Form.Label>
+                                    <Form.Control value='The Drake' />
+                                </Col>
                                 <Col>
                                     <Form.Label>Property Manager:</Form.Label>
                                     <Form.Control value='ABC Company' />
@@ -105,7 +136,7 @@ const PropertyManagerMaintenance = () => {
                             <Row className='pt-3'>
                                 <Col>
                                     <Form.Label>Street Address:</Form.Label>
-                                    <Form.Control value='1234 Main Street' />
+                                    <Form.Control value='123 Main Street' />
                                 </Col>
                                 <Col>
                                     <Form.Label>Unit:</Form.Label>
@@ -133,21 +164,22 @@ const PropertyManagerMaintenance = () => {
                                 </Col>
                                 <Col />
                                 <Col>
-                                    <Form.Label>Invoice code:</Form.Label>
-                                    <Form.Control value='ABCC' />
+                                    <Form.Label>Select Associated Users:</Form.Label>
+                                    <Form.Check type='checkbox' id='user1' checked='true' label='John L. Smith'/>
+                                    <Form.Check type='checkbox' id='user1' label='Mary A. Jones'/>
+                                    <Form.Check type='checkbox' id='user1' checked='true' label='James J. Jonas'/>
                                 </Col>
+                                <Col />
                             </Row>
                             <Row className='pt-3'>
                                 <Col>
-                                    <Form.Label>Select Primary Contact:</Form.Label>
-                                    <Form.Select>
-                                        <option>John L. Smith</option>
-                                        <option>Mary A. Jones</option>
-                                        <option>James J. Jonas</option>
-                                    </Form.Select>
+                                    <Form.Label>Caption Language</Form.Label>
+                                    <Form.Control value='ABC Company, as agent for 123 Main, LLC'/>
                                 </Col>
-                                <Col />
-                                <Col />
+                                <Col>
+                                    <Form.Label>Paragraph One Language</Form.Label>
+                                    <Form.Control value='ABC Company, as agent for 123 Main, LLC' />
+                                </Col>
                             </Row>
                         </Container>
                     </Form>
@@ -167,4 +199,4 @@ const PropertyManagerMaintenance = () => {
     )
 }
 
-export default PropertyManagerMaintenance
+export default PropertyOwnerMaintenance
