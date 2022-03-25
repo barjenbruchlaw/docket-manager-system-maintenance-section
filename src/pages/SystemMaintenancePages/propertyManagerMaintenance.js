@@ -89,6 +89,10 @@ const PropertyManagerMaintenance = () => {
                 </tbody>
             </Table>
 
+            <div className='text-end p-5 m-5'>
+                <Button disabled>Add</Button>
+            </div>
+
             <Modal show={show} onHide={handleClose} size='xl'>
                 <Modal.Header className='bg-light' closeButton>
                     <Modal.Title>Edit Property Manager</Modal.Title>
